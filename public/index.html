@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="realtimeWatcherApp">
+<head>
+  <title>Realtime File Tailing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/tree-control.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/tree-control-attribute.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-tree-control.js"></script>
+  <script type="text/javascript" src="./javascripts/context-menu.js"></script>
+  <script src="./javascripts/app.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                    <h3>Realtime File Watcher</h3>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">Directory View</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <treecontrol class="tree-classic"
+                        tree-model="data"
+                        options="treeOptions"
+                        on-selection="showSelectedFile(node)"
+                        selected-node="node1">
+                        {{node.name}}
+                     </treecontrol>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">File Contents</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Nothing to show right now
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
