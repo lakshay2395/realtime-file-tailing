@@ -9,18 +9,20 @@ function walkDirectory(dir){
         "children" : []
     }
     var list = fs.readdirSync(dir);
-    list.forEach((file) => {
-        filePath = path.resolve(dir, file);
-        let stat = fs.lstatSync(filePath)
-        if (stat.isFile()) {
-            results.children.push({
-                "name" : file,
-                "value" : filePath
-            });
-        } else {
-            results.children.push(walkDirectory(filePath));
-        }
-    });
+    if(list.length > 0){
+        list.forEach((file) => {
+            filePath = path.resolve(dir, file);
+            let stat = fs.lstatSync(filePath)
+            if (stat.isFile()) {
+                results.children.push({
+                    "name" : file,
+                    "value" : filePath
+                });
+            } else {
+                results.children.push(walkDirectory(filePath));
+            }
+        });
+    }
     return results;
 }
 

@@ -41,4 +41,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+process.on('uncaughtException', function (err) {
+  console.error(err.stack);
+  console.log("Node NOT Exiting...");
+});
+
 module.exports = app;
