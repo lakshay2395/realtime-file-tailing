@@ -8,7 +8,7 @@ module.exports = function(io){
   var express = require('express');
   var router = express.Router();
   var ts = require('tail-stream');
-
+    
   router.get("/getDirectoryTree",function(req,res){
       console.log("directory = ",directory);
       return res.json(directoryReader.walkDirectory(directory));
