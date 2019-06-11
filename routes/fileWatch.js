@@ -11,6 +11,8 @@ module.exports = function(io){
     
   router.get("/getDirectoryTree",function(req,res){
       console.log("directory = ",directory);
+      var data = directoryReader.walkDirectory(directory);
+      console.log("data = ",data);
       return res.json(directoryReader.walkDirectory(directory));
   });
 
