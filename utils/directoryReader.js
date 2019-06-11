@@ -15,17 +15,18 @@ function walkDirectory(dir){
             filePath = path.resolve(dir, file);
             let stat = fs.lstatSync(filePath)
             if (stat.isFile()) {
-                console.log("file = ",filePath)
+                // console.log("file = ",filePath)
                 results.children.push({
                     "name" : file,
                     "value" : filePath
                 });
             } else {
-                console.log("directory = ",filePath)
+                // console.log("directory = ",filePath)
                 results.children.push(walkDirectory(filePath));
             }
         });
     }
+    console.log("results = ",results);
     return results;
 }
 
