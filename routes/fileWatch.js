@@ -1,7 +1,7 @@
 const directoryReader = require("../utils/directoryReader");
 const process = require("process");
 
-const directory = ".."; 
+const directory = process.cwd(); 
 
 module.exports = function(io){
 
