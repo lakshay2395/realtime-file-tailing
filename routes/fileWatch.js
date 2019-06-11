@@ -1,6 +1,7 @@
 const directoryReader = require("../utils/directoryReader");
+const process = require("process");
 
-const directory = "C:\\Users\\Lakshay\\Desktop\\WORK\\efk\\efk-poc\\final-scripts"; 
+const directory = process.cwd(); 
 
 module.exports = function(io){
 

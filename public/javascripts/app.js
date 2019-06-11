@@ -1,5 +1,4 @@
 angular.module("realtimeWatcherApp",['treeControl'])
-.constant("baseUrl","http://localhost:3000")
 .factory('socket', function ($rootScope) {
     var socket = io.connect();
     return {
@@ -23,24 +22,11 @@ angular.module("realtimeWatcherApp",['treeControl'])
       }
     };
 })
-.service("FileService",function($http,$q,baseUrl){
+.service("FileService",function($http,$q){
 
     this.getDirectoryContents = function(){
         var defer = $q.defer();
-        $http.get(baseUrl+"/getDirectoryTree")
-        .then(function(response){
-            if(!response.data.error){
-                defer.resolve(response.data);
-            }else{
-                defer.reject(response.data.error);
-            }
-        })
-        return defer.promise;
-    }
-
-    this.getCurrentFileContents = function(filePath){
-        var defer = $q.defer();
-        $http.post(baseUrl+"/file/getContents",angular.copy({"filePath" : filePath}))
+        $http.get("getDirectoryTree")
         .then(function(response){
             if(!response.data.error){
                 defer.resolve(response.data);
@@ -55,6 +41,7 @@ angular.module("realtimeWatcherApp",['treeControl'])
     
     $scope.data = [];
     $scope.shownFileContent = "";
+    $scope.selectedNode = null;
 
     $scope.treeOptions = {
         nodeChildren: "children",
@@ -79,17 +66,22 @@ angular.module("realtimeWatcherApp",['treeControl'])
     });
 
     $scope.showSelectedFile = function(node){
-        console.log("node selected = ",node);
+        $scope.shownFileContent = "";
+        $scope.selectedNode = node;
         socket.emit("startFileWatch",node);
     }
 
     socket.on("newFileChanges",function(data){
-        console.log("newData = ",data);
         $scope.shownFileContent += data; 
+        $(document).ready(function(){
+            var $id = $("#downScrolledDiv");
+            $id.scrollTop($id[0].scrollHeight);
+        })
     });
 
     socket.on("fileWatchError",function(err){
         console.log("error = ",err);
+        window.alert(err);
     })
 
 });
