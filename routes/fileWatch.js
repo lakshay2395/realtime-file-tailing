@@ -10,9 +10,7 @@ module.exports = function(io){
   var ts = require('tail-stream');
     
   router.get("/getDirectoryTree",function(req,res){
-      console.log("directory = ",directory);
       var data = directoryReader.walkDirectory(directory);
-      console.log("data = ",data);
       return res.json(directoryReader.walkDirectory(directory));
   });
 
