@@ -8,6 +8,7 @@ function walkDirectory(dir){
         "value" : dir,
         "children" : []
     }
+    console.log("dir = ",dir);
     var list = fs.readdirSync(dir);
     if(list.length > 0){
         list.forEach((file) => {
